@@ -1,1 +1,0 @@
-define(["backbone"],function(a){return a.View.extend({initialize:function(){_.bindAll(this),$(window).on("resize",this.resize)},resize:function(){},render:function(a){var b=this;return a?this.resize():setTimeout(function(){b.resize()},300),this}})});
