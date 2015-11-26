@@ -7,9 +7,25 @@ function print() { __p += __j.call(arguments, '') }
 with (obj) {
 __p += '<h3 class="page-header">' +
 ((__t = ($.i18n.t("admin.about-page.page-title"))) == null ? '' : __t) +
-'</h3>\r\n<iframe width="0" height="0" border="0" name="dummyframe" id="dummyframe" style="visibility: hidden;"></iframe>\r\n<form class="breadcrumb">\r\n    <div class="form-group">\r\n        <label for="image-row">' +
+'</h3>\r\n\r\n<form class="breadcrumb">\r\n    <div class="form-group">\r\n        <label>' +
+((__t = ($.i18n.t("admin.about-page.choose_title_image"))) == null ? '' : __t) +
+'</label>\r\n        <div class="row">\r\n            <div class="col-sm-offset-0 col-sm-3">\r\n                <img id="title_image" src="';
+ if(data && data.title_image_url) {;
+__p += ' ' +
+((__t = (data.title_image_url)) == null ? '' : __t) +
+' ';
+ } else { ;
+__p += './img/placeholder_300x300.png';
+ } ;
+__p += '" class="img-responsive img-thumbnail">\r\n            </div>\r\n        </div>\r\n        <br />\r\n        <span class="alert-danger"><b>' +
+((__t = ($.i18n.t("admin.about-page.title-image-alert"))) == null ? '' : __t) +
+'</b></span>\r\n        <input id="title_image_input" name="title_image_input" class="btn btn-default" type="file" accept=".gif,.png,.jpg,.tif,.jpeg">\r\n    </div>\r\n    <button id="save_title_image_btn" class="btn btn-default">' +
+((__t = ($.i18n.t("admin.about-page.save-btn"))) == null ? '' : __t) +
+'</button>\r\n    <button id="delete_title_image_btn" class="btn btn-danger">' +
+((__t = ($.i18n.t("admin.about-page.delete-btn"))) == null ? '' : __t) +
+'</button>\r\n</form>\r\n\r\n<br/>\r\n\r\n<form class="breadcrumb">\r\n    <div class="form-group">\r\n        <label for="image-row">' +
 ((__t = ($.i18n.t("admin.about-page.choose-photo-title"))) == null ? '' : __t) +
-'</label>\r\n        <div class="row" id="image-row">\r\n            <div class="col-sm-offset-0 col-sm-3">\r\n                <img id="image" src="';
+'</label>\r\n        <div class="row" id="image-row">\r\n            <div class="col-sm-offset-0 col-sm-3">\r\n                <img id="content_image" src="';
  if(data && data.image_url) {;
 __p += ' ' +
 ((__t = (data.image_url)) == null ? '' : __t) +
@@ -17,7 +33,7 @@ __p += ' ' +
  } else { ;
 __p += './img/placeholder_300x300.png';
  } ;
-__p += '" class="img-responsive img-thumbnail">\r\n            </div>\r\n        </div>\r\n        <br />\r\n        <input id="avatar-image" name="avatar-image" class="btn btn-default" type="file" accept=".gif,.png,.jpg,.tif,.jpeg">\r\n    </div>\r\n    <div class="form-group">\r\n        <label for="description">' +
+__p += '" class="img-responsive img-thumbnail">\r\n            </div>\r\n        </div>\r\n        <br />\r\n        <input id="content_image_input" name="content_image_input" class="btn btn-default" type="file" accept=".gif,.png,.jpg,.tif,.jpeg">\r\n    </div>\r\n    <div class="form-group">\r\n        <label for="description">' +
 ((__t = ($.i18n.t("admin.about-page.description-title"))) == null ? '' : __t) +
 '</label>\r\n        <textarea cols="80" id="description" rows="8">';
  if(data && data.description) {;
@@ -229,7 +245,9 @@ __p += '><a href="#admin">' +
  if(selected_page && all_pages.bouquets === selected_page) { ;
 __p += 'class="active"';
  } ;
-__p += '><a href="#admin/bouquets">' +
+__p += '><a href="#admin/albums/' +
+((__t = (album_types.bouquets)) == null ? '' : __t) +
+'">' +
 ((__t = ($.i18n.t("admin.left-panel.bouquets"))) == null ? '' : __t) +
 '</a></li>\r\n                <li ';
  if(selected_page && all_pages.decorations === selected_page) { ;
@@ -376,11 +394,7 @@ __p += '\r\n\r\n<div class="images-grid" style="height: ' +
  if(data && data.images && data.images.length > 0) { ;
 __p += '\r\n        ';
  _.each(data.images, function(image) { ;
-__p += '\r\n            <img class="lazy" data-original="' +
-((__t = (image.url)) == null ? '' : __t) +
-'" data-id="' +
-((__t = (image.id)) == null ? '' : __t) +
-'" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"\r\n                style="width: ' +
+__p += '    \r\n            <div style="width: ' +
 ((__t = (image.styles.width)) == null ? '' : __t) +
 'px;\r\n                        height: ' +
 ((__t = (image.styles.height)) == null ? '' : __t) +
@@ -388,13 +402,23 @@ __p += '\r\n            <img class="lazy" data-original="' +
 ((__t = (image.styles.left)) == null ? '' : __t) +
 'px;\r\n                        top: ' +
 ((__t = (image.styles.top)) == null ? '' : __t) +
-'px;" ';
+'px;">\r\n                <img class="lazy" data-original="' +
+((__t = (image.url)) == null ? '' : __t) +
+'" data-id="' +
+((__t = (image.id)) == null ? '' : __t) +
+'" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"\r\n                         ';
  if(image.description){ ;
 __p += 'alt="' +
 ((__t = (image.description)) == null ? '' : __t) +
 '" ';
  } ;
-__p += '/>\r\n        ';
+__p += '/>\r\n                ';
+ if(image.description){ ;
+__p += '<div class="description">' +
+((__t = (image.description)) == null ? '' : __t) +
+'</div>';
+ } ;
+__p += '\r\n            </div>\r\n        ';
  }); ;
 __p += '\r\n    ';
  } ;
@@ -435,11 +459,21 @@ return __p
 
 this["JST"]["pages/user_part/common/header.html"] = function(obj) {
 obj || (obj = {});
-var __t, __p = '', __e = _.escape;
+var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
+function print() { __p += __j.call(arguments, '') }
 with (obj) {
-__p += '<link rel="stylesheet" href="css/theme_styles.css"/>\r\n\r\n<header class="layout-logo-center">\r\n    <div class="container">\r\n        <div class="inner">\r\n            <div class="logo logo-text">\r\n                <a href="#home">\r\n                    ' +
+__p += '<link rel="stylesheet" href="css/theme_styles.css"/>\r\n\r\n<header class="layout-logo-center">\r\n    <div class="container">\r\n        <div class="inner">\r\n            <div class="logo logo-text">\r\n                <!--<a href="#home">\r\n                        ' +
 ((__t = ($.i18n.t("user.header.title"))) == null ? '' : __t) +
-'\r\n                </a>\r\n            </div>\r\n            <nav class="menu">\r\n                <!-- Dynamic content -->\r\n            </nav>\t\r\n        </div>\r\n    </div>\r\n</header>\r\n<section class="page" data-hash="faq" data-structure="page">\r\n    <h1 class="title">\r\n        <hr class="left-hr"/><span>' +
+'\r\n                    </a>-->\r\n                <img src="./img/app_logo.png"/>\r\n            </div>\r\n            <nav class="menu">\r\n                <!-- Dynamic content -->\r\n            </nav>\t\r\n        </div>\r\n    </div>\r\n</header>\r\n<div class="parallax-banner loading" \r\n\tstyle="background-image: url(';
+ if(title_img_url) { ;
+__p +=
+((__t = (title_img_url)) == null ? '' : __t);
+ } ;
+__p += '); ';
+ if(!title_img_url) { ;
+__p += ' display: none;';
+ } ;
+__p += '">\r\n</div>\r\n<section class="page" data-hash="faq" data-structure="page">\r\n    <h1 class="title">\r\n        <hr class="left-hr"/><span>' +
 ((__t = (page_name)) == null ? '' : __t) +
 '</span>\r\n    </h1>\r\n    <div id="content" class="container">\r\n    </div>\r\n    \r\n    <div class="fsbox disabled-selection">\r\n        <div class="control close"><a class="fsbox-close"></a></div>\r\n        <div class="slides-container">\r\n            <a class="fsbox-prev"><i></i></a>\r\n            <a class="fsbox-next"><i></i></a>\r\n            <div class="spinner"><!--  --></div>\r\n            <div class="slides">\r\n                <img/>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</section>\r\n<footer>\r\n    <div class="container">\r\n        <div class="share-box">\r\n        </div>\r\n        <div class="social-icons">\r\n            <style>\r\n\r\n            </style>\r\n            <div class="social-icons-wrapper">\r\n                <div class="social-icon-box">\r\n                    <a href="https://www.facebook.com/designforlifeMG" target="_blank"><i class="icon-facebook"></i></a>\r\n                </div>\t\t\t\t\r\n\t\t\t\t<div class="social-icon-box">\r\n\t\t\t\t\t<a href="https://instagram.com/designforlife.pl/" target="_blank"><i class="icon-instagram"></i></a>\r\n\t\t\t\t</div>\r\n            </div>\t\t\r\n\t\t</div>\r\n        <div class="copyright">\r\n            <span>Copyright 2015 &copy; All rights reserved</span> <br> <a href="mailto:vik-buchinski@ya.ru" target="_blank">site by Victor Buchinskiy</a>\r\n        </div>\r\n    </div>\r\n</footer>';
 
@@ -462,7 +496,9 @@ __p += '"><a href="#home">' +
  if(tab_name == all_tabs.bouquets) { ;
 __p += 'active';
  } ;
-__p += '"><a href="#bouquets">' +
+__p += '"><a href="#albums/' +
+((__t = (all_tabs.bouquets)) == null ? '' : __t) +
+'">' +
 ((__t = ($.i18n.t("user.header.bukiety"))) == null ? '' : __t) +
 '</a></li>\r\n    <li class="menu-item separator">|</li>\r\n    <li class="menu-item ';
  if(tab_name == all_tabs.decorations) { ;
